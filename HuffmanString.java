@@ -17,11 +17,14 @@ public class HuffmanString {
             }
         }
 
-        for (var entry: charCountMap.entrySet()) {
-            huffmanMap.put(entry.getKey(), entry.getValue());
-        }
+        // sort charCountMap by values (ascending order)
+        charCountMap.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
 
-        System.out.println(huffmanMap);
+        // for (var entry: charCountMap.entrySet()) {
+        //     huffmanMap.put(entry.getKey(), entry.getValue());
+        // }
+
+        // System.out.println(huffmanMap);
         return huffmanMap;
     }
 
