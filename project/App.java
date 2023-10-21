@@ -25,7 +25,7 @@ public class App {
                     String imageName = file.getName();
 
                     //Converting image to pixels
-
+                    System.out.println("---------------------------------- NEW IMAGE FILE ----------------------------------");
                     ImagetoPixelConverter ImagetoPixelConverter = new ImagetoPixelConverter(ImageDirectory + imageName);
 
                     //Converting the image to pixels

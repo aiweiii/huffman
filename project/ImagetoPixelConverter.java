@@ -17,7 +17,6 @@ public class ImagetoPixelConverter {
         } else {
             colorsMap.put(color, colorsMap.get(color) + 1);
         }
-        System.out.println(colorsMap);
         return colorsMap;
     }
     
@@ -49,6 +48,8 @@ public class ImagetoPixelConverter {
                 for (int y = 0; y < height; y++) {
                     int color = image.getRGB(x, y);
                     findDuplicates(color);
+                    System.out.println("---------------------- COLORSMAP --------------------------");
+                    System.out.println(colorsMap);
                     // System.out.println("-------------------color: "+color);
                     int red = (color >> 16) & 0xFF;
                     int green = (color >> 8) & 0xFF;
