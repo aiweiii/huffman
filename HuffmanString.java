@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Huffman {
+public class HuffmanString {
     
     public static TreeMap<Character, Integer> sortedTreeMap(String s) {
         var charCountMap = new HashMap<Character, Integer>();
