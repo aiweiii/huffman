@@ -1,4 +1,4 @@
-run:
+compile:
 	javac ImagetoPixelConverter.java
 	javac PixeltoImageConverter.java
 	javac MAECalculator.java

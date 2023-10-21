@@ -8,8 +8,8 @@ import java.util.HashMap;
 public class ImagetoPixelConverter {
     private BufferedImage image;
     private int[][][] pixelData;
-    private HashMap<Integer, Integer> colorsMap = new HashMap<>();
-    private HashMap<Integer, Integer> duplicatesMap = new HashMap<>();
+    private HashMap<Integer, Integer> colorsMap;
+    private HashMap<Integer, Integer> duplicatesMap;
 
     public HashMap<Integer, Integer> findDuplicates(int color) {
         if (colorsMap.get(color) == null) {
@@ -21,6 +21,9 @@ public class ImagetoPixelConverter {
     }
     
     public void printDuplicates(HashMap<Integer, Integer> map) {
+        // Initialize duplicatesMap array
+        this.duplicatesMap = new HashMap<>();
+
         for (var entry : map.entrySet()) {
             if (entry.getValue() > 1) {
                 duplicatesMap.put(entry.getKey(), entry.getValue());
@@ -42,14 +45,15 @@ public class ImagetoPixelConverter {
             
             // Initialize the pixelData array
             this.pixelData = new int[width][height][3];
+
+            // Initialize colorsMap array
+            this.colorsMap = new HashMap<>();
             
             // Convert the image into pixelData
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
                     int color = image.getRGB(x, y);
                     findDuplicates(color);
-                    System.out.println("---------------------- COLORSMAP --------------------------");
-                    System.out.println(colorsMap);
                     // System.out.println("-------------------color: "+color);
                     int red = (color >> 16) & 0xFF;
                     int green = (color >> 8) & 0xFF;
@@ -63,8 +67,8 @@ public class ImagetoPixelConverter {
                     System.out.println();
                 }
             }
-
-            printDuplicates(duplicatesMap);
+            System.out.println("---------------------- DUPLICATESMAP --------------------------");
+            printDuplicates(colorsMap);
 
         } catch (IOException e) {
             e.printStackTrace();
