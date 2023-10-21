@@ -5,8 +5,8 @@ import java.util.TreeMap;
 public class Huffman {
     
     public static TreeMap<Character, Integer> sortedTreeMap(String s) {
-        HashMap<Character, Integer> charCountMap = new HashMap<>();
-        TreeMap<Character, Integer> huffmanMap = new TreeMap<>();
+        var charCountMap = new HashMap<Character, Integer>();
+        var huffmanMap = new TreeMap<Character, Integer>();
 
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
@@ -17,7 +17,7 @@ public class Huffman {
             }
         }
 
-        for (Map.Entry<Character, Integer> entry: charCountMap.entrySet()) {
+        for (var entry: charCountMap.entrySet()) {
             huffmanMap.put(entry.getKey(), entry.getValue());
         }
 
