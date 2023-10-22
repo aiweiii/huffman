@@ -6,3 +6,6 @@ compile:
 	javac PSNRCalculator.java
 	javac Utility.java
 	javac App.java
+
+clear:
+	rm -rf ./*.class
