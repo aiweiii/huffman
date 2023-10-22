@@ -12,6 +12,7 @@ public class ImagetoPixelConverter {
     private HashMap<Integer, Integer> duplicatesMap;
 
     public HashMap<Integer, Integer> findDuplicates(int color) {
+        // Find duplicated pixels
         if (colorsMap.get(color) == null) {
             colorsMap.put(color, 1);
         } else {
@@ -64,11 +65,10 @@ public class ImagetoPixelConverter {
                     // System.out.println("-------------------green: "+ pixelData[x][y][1]);
                     pixelData[x][y][2] = blue;
                     // System.out.println("-------------------blue: " + pixelData[x][y][2]);
-                    System.out.println();
                 }
             }
-            System.out.println("---------------------- DUPLICATESMAP --------------------------");
-            printDuplicates(colorsMap);
+            // System.out.println("---------------------- DUPLICATESMAP --------------------------");
+            // printDuplicates(colorsMap);
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -18,13 +18,21 @@ public class HuffmanString {
         }
 
         // sort charCountMap by values (ascending order)
-        charCountMap.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
-
+        // does not sort in place!
+        charCountMap
+                .entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue())
+                .forEach(System.out::println);
+        
+        // if intending to use Huffman (need to use comparator to sort by values!)
+        
         // for (var entry: charCountMap.entrySet()) {
         //     huffmanMap.put(entry.getKey(), entry.getValue());
         // }
 
         // System.out.println(huffmanMap);
+
         return huffmanMap;
     }
 
