@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+// Ai Wei's original huffman code. Can ignore.
 public class HuffmanString {
     
     public static TreeMap<Character, Integer> sortedTreeMap(String s) {
