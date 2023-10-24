@@ -9,4 +9,5 @@ Huffman encoding for lossless image compression.
 1. `cd project`
 2. `javac -d classes/ App.java`
 3. `java -cp classes/ App`
+
 Alternatively, you can run `make compile` followed by `make run` if you have `make` installed in your shell.
