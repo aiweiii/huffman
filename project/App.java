@@ -21,11 +21,11 @@ public class App {
 
         if (files != null) {
             for (File file : files) {
-                if (file.isFile()) {
+                if (file.isFile() && file.getName().equals("10404007.png")) {
                     String imageName = file.getName();
 
                     //Converting image to pixels
-                    System.out.println("---------------------------------- NEW IMAGE FILE ----------------------------------");
+
                     ImagetoPixelConverter ImagetoPixelConverter = new ImagetoPixelConverter(ImageDirectory + imageName);
 
                     //Converting the image to pixels

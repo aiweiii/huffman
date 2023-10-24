@@ -1,11 +1,8 @@
 compile:
-	javac ImagetoPixelConverter.java
-	javac PixeltoImageConverter.java
-	javac MAECalculator.java
-	javac MSECalculator.java
-	javac PSNRCalculator.java
-	javac Utility.java
-	javac App.java
+	javac -d classes/ App.java
+
+run:
+	java -cp classes/ App
 
 clear:
 	rm -rf ./*.class

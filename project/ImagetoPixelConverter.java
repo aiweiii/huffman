@@ -67,8 +67,8 @@ public class ImagetoPixelConverter {
                     // System.out.println("-------------------blue: " + pixelData[x][y][2]);
                 }
             }
-            System.out.println("---------------------- DUPLICATESMAP --------------------------");
-            printDuplicates(colorsMap);
+            // System.out.println("---------------------- DUPLICATESMAP --------------------------");
+            // printDuplicates(colorsMap);
 
         } catch (IOException e) {
             e.printStackTrace();
