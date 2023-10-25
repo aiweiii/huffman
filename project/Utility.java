@@ -14,7 +14,6 @@ public class Utility {
         HuffmanNode left;
         HuffmanNode right;
 
-        //constructor, Time O(1) Space O(1)
         HuffmanNode(int pixel, int frequency, HuffmanNode left, HuffmanNode right) {
             this.pixel = pixel;
             this.frequency = frequency;
@@ -22,7 +21,6 @@ public class Utility {
             this.right = right;
         }
 
-        // Time O(1) Space O(1)
         @Override
         public String toString() {
             return "(" + pixel + ", " + frequency + ")";
