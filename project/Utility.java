@@ -74,17 +74,52 @@ public class Utility {
         createCodeRec(node.right, map, s + '1');
     }
 
+    private int[][][] decode(String encoded, int width, int height) {
+        int[][][] pixelData = new int[width][height][1];
+        int x = 0;
+        int y = 0;
+
+	    HuffmanNode curr = root;
+        for (int i = 0; i < encoded.length(); i++) {
+            curr = encoded.charAt(i) == '1' ? curr.right : curr.left;
+            if (curr.left == null && curr.right == null) {
+                // add pixel into pixelData array
+                // if (x >= width) {
+
+                // }
+                if (y >= height) {
+                    x++;
+                    y = 0;
+                }
+                if (x >= width) {
+                    return pixelData;
+                }
+                pixelData[x][y][0] = curr.pixel;
+                // System.out.println("halo at x:" + x + ", y:" + y + " = " + pixelData[x][y][0]);
+                y++;
+                curr = root;
+            }
+        }
+        
+        // for (int i = 0; i < width; i++) {
+        //     for (int j = 0; j < height; j++) {
+        //         // System.out.println("color at x: " + i + ",y: " + j+ " = " + pixelData[i][j][0]);
+        //     }
+        // }
+        return pixelData;
+	}
+
     // ACTUAL IMPLEMENTATION
     public void Compress(int[][][] pixels, String outputFileName) throws IOException {
 
         // Initialize colorsMap array
         this.colorsMap = new HashMap<>();
-            
+
         int width = pixels.length;
         int height = pixels[0].length;
 
-        int count1 = 0;
-        int count2 = 0;
+        // System.out.println("original width: " + width);
+        // System.out.println("original height: " + height);
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -112,6 +147,7 @@ public class Utility {
                 int green = pixels[x][y][1];
                 int blue = pixels[x][y][2];
                 int color = (red << 16) | (green << 8) | blue;
+                // System.out.println("color at x: " + x + ",y: " + y + " = " + color);
 
                 colorBinaryString = codeMap.get(color);
                 // System.out.println("colorBinaryString: " + colorBinaryString);
@@ -119,10 +155,15 @@ public class Utility {
             }
         }
 
-        // write BOTH encodedPixelsSb and codeMap into a bin file
+        // write encodedPixelsSb into a bin file
         try {
             FileOutputStream fos = new FileOutputStream(outputFileName);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            DataOutputStream dos = new DataOutputStream(fos);
+            // ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+            // Write width and height into file
+            dos.writeInt(width);
+            dos.writeInt(height);
             
             /* -- Write encodedPixelsSb bit-by-bit into a bin file --
              * Idea is to combine all the bits until they reach 8-bits aka 1 byte, then pump it into the file
@@ -157,13 +198,8 @@ public class Utility {
                 fos.write(currentByte);
             }
 
-            /*
-             * Write codeMap as object into the file
-             */
-            // oos.writeObject(codeMap);
-
             fos.close();
-            oos.close();
+            // oos.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -174,24 +210,30 @@ public class Utility {
         // The following is a bad implementation that we have intentionally put in the function to make App.java run, you should 
         // write code to reimplement the function without changing any of the input parameters, and making sure that it returns
         // an int [][][]
+        try {
+            FileInputStream fis = new FileInputStream(inputFileName);
+            DataInputStream dis = new DataInputStream(fis);
 
-        // FileInputStream reads image line by line 
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(inputFileName))) {
-            Object obj1 = ois.readObject();
-            Object obj2 = ois.readObject();
+            int width = dis.readInt();
+            int height = dis.readInt();
+            // System.out.println("check width: " + width);
+            // System.out.println("check height: " + height);
 
+            int currentByte;
+            StringBuilder bitSequence = new StringBuilder();
 
-            if ((obj1 instanceof int[][][]) && (obj2 instanceof Map)) {
-                int[][][] pixelData = (int[][][]) obj1;
-                Map decodedMap = (Map) obj2;
-
-                int width = pixelData.length;
-                int height = pixelData[0].length;
-
-            } else {
-                throw new IOException("Invalid object type in the input file (obj1)");
+            while ((currentByte = fis.read()) != -1) {
+                for (int i = 7; i >= 0; i--) {
+                    char bit = ((currentByte >> i) & 1) == 1 ? '1' : '0';
+                    bitSequence.append(bit);
+                }
             }
+            // System.out.println("Read Bit Sequence: " + bitSequence.toString());
 
+            decode(bitSequence.toString(), width, height);
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return new int[1][1][1];
     }
