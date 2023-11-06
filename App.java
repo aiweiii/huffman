@@ -21,8 +21,8 @@ public class App {
 
         if (files != null) {
             for (File file : files) {
-                if (file.isFile() && file.getName().equals("10188041.png")) { // for testing, target one pic only
-                // if (file.isFile()) {
+                // if (file.isFile() && file.getName().equals("10188041.png")) { // for testing, target one pic only
+                if (file.isFile()) {
                     String imageName = file.getName();
 
                     //Converting image to pixels
